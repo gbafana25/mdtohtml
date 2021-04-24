@@ -31,13 +31,7 @@ string getlink(string in) {
 	return full;
 
 }
-
-int * getlinklimits(string line) {
-	int inds[2];
-	inds[0] = line.find("[");
-	inds[1] = line.find(")");	
-
-}
+	
 
 bool checklink(string in) {
 	int ob = in.find("[");
@@ -53,27 +47,26 @@ bool checklink(string in) {
 
 }
 
-void scan_paragraph(string l) {
-	//cout << lnk.tag;
 
-	//return l;
-	
-
-}
 
 string process_line(string line) {
-	string tag = "<h1>";
 	string output = line;
 		if(line.substr(0, 1) == "#") {
 			if(line.substr(0, 2) == "##") {
-				line.erase(0, 2);
-				line.insert(0, "<h2>");
-				line.append("</h2>");
+				if(line.substr(0, 3) == "###") {
+					line.erase(0, 3);
+					line.insert(0, "<h3>");
+					line.append("</h3>");
+				} else {
+					line.erase(0, 2);
+					line.insert(0, "<h2>");
+					line.append("</h2>");
+
+				}
 			} else {
 				line.erase(line.begin());
-				line.insert(0, tag);
-				tag.insert(1, "/");
-				line.append(tag);
+				line.insert(0, "<h1>");
+				line.append("</h1>");
 			}
 		} else {
 			// insert <p> tags
@@ -97,7 +90,7 @@ string process_line(string line) {
 int main() {
 	fstream testfile;
 	fstream outfile;
-	testfile.open("/home/gareth/esp8266_honeypot/README.md", ios::in);
+	testfile.open("/home/gareth/table-signal/README.md", ios::in);
 	
 	string line;
 	string parsed;
@@ -105,6 +98,7 @@ int main() {
 		parsed.append(process_line(line));
 	
 	}
+
 	cout << parsed;
 	outfile.open("test.html", ios::out);
 	outfile << parsed;

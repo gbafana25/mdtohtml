@@ -1,23 +1,15 @@
-<h1> ESP8266 honeypot project</h1>
+<h1> Lunch Table Signalling System</h1>
 <p></p>
-<h1> About this project #</h1>
+<p>A common problem at lunch this year has been that since tables aren't called in order, some are often forgotten about.  This can cause some frustration during lunch, as it is hard for the lunch prefects to see which tables haven't gotten their food yet.  This system uses a microbit to signal lunch tables when it is their turn to join the lunch line.</p>
 <p></p>
-<p>This is a honeypot programmed in Micropython for the ESP8266</p>
+<h2> How it Works</h2>
+<h3> Server</h3>
+<p>The server uses the two buttons on the microbit to call up tables from both sides of the lunch room (there are 2 lines).  When the prefect presses one of the buttons, it sends out a radio signal with the table number that can join the line.  </p>
+<h3> Client</h3>
+<p>The client listens for the number broadcasted by the server, and then lights up the leds when it receives it number.</p>
 <p></p>
-<p>The honeypot is set up to act as a telnet server.</p>
-<p>Original inspiration for this came from the arduino-powered honeypot, found <a href='https://www.reddit.com/r/arduino/comments/5ngt87/this_is_my_arduinopowered_honeypot_if_you_want_to/'>here.</a>
-<p></p>
-<p>The esp8266 handles all of the socket functions and the terminal prompt.  The access point is disabled in the custom `boot.py` file.  The `boot.py` file must have the WiFi SSID, Wifi password, static IP, subnet mask, router IP, and DNS server address changed as needed.  The ampy config file (whichever one applies to your system) must be edited to point ampy to the right port (COMx for Windows, /dev/ttyUSB* for Linux, /dev/tty.* for Mac)</p>
-<p></p>
-<h1> What is a honeypot #</h1>
-<p></p>
-<p>A honeypot is a device designed to lure/attract hackers into exploring your device as if it was a legitamte piece of infrastructure or private property that is unprotected.  Many open source honeypots, such as the ones found <a href='https://github.com/paralax/awesome-honeypots'>here</a>
-<p></p>
-<p>This honeypot started as a fun thing to do and see how many people still attack Telnet devices.  This honeypot can not be as advanced as the ones linked above, since it is being run on a microcontroller.  This is why it emulates Telnet.  Telnet is a simple protocol that is easy to emulate on microcontroller, due to their being no encryption to worry about.</p>
-<p></p>
-<h2> The hardware and software ##</h2>
-<p>   - An ESP8266 microcontroller</p>
-<p>   - A Windows, Linux, or MacOS computer :computer:</p>
-<p>   - If you have the bare ESP8266 module, you will also need a USB to Serial converter board, and the additional drivers to go with it</p>
-<p>   - If you have a board with the USB to Serial chip already on it, you still need the appropriate drivers and a micro USB cable :electric_plug:</p>
+<h2> Setup</h2>
+<p>- Run `setup.sh` to change the table number for the client device (before uploading)</p>
+<p>- Create a hex file for both `client.py` and `server.py` with the <a href='https://codewith.mu/en/download'>Mu editor</a>
+<p>- Drag and drop `.hex` files onto microbit</p>
 <p></p>
