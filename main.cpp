@@ -47,10 +47,25 @@ bool checklink(string in) {
 
 }
 
+void checkcode(string line) {
+	string code_seg;
+	if(line.find("`") != string::npos) {
+		int beg = line.find("`");
+		for(int i = beg; i < line.size(); i++) {
+			if(line.substr(0, 1) == "`") {
+				code_seg = line.substr(beg, (i-1)-beg);
+				cout << code_seg;
+				line.insert(beg, "<p style='color: red;'>" + code_seg + "</p>");
+			}
+		}
+
+	}	
+
+}
+
 
 
 string process_line(string line) {
-	string output = line;
 		if(line.substr(0, 1) == "#") {
 			if(line.substr(0, 2) == "##") {
 				if(line.substr(0, 3) == "###") {
@@ -78,6 +93,7 @@ string process_line(string line) {
 				line.insert(start, getlink(line));
 				line.erase(line.find("["), line.find(")"));	
 			}
+			checkcode(line);
 		}
 
 
