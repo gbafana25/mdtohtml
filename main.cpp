@@ -47,26 +47,6 @@ bool checklink(string in) {
 
 }
 
-string checkcode(string line) {
-	string code_seg;
-	string comp;
-		//cout << line.substr(line.find("`"), 2);
-		//line.insert(line.find("`"), "<p style='color: red;'> test </p>");
-	
-	int beg = line.find("`");
-	for(int i = 0; i < line.size(); i++) {
-		if(line.substr(i, 1) == "`") {
-			code_seg = line.substr(beg, (i-1)-beg);
-			cout << code_seg;
-			comp = "<p style='color: red;'>" + code_seg + "</p>";
-			return comp;	
-				//line.insert(beg, "<p style='color: red;'>" + code_seg + "</p>");
-		}
-	}
-
-
-}
-
 
 
 string process_line(string line) {
@@ -97,13 +77,21 @@ string process_line(string line) {
 				line.insert(start, getlink(line));
 				line.erase(line.find("["), line.find(")"));	
 			}
-			if(line.find("`") != string::npos) {
-				int tick = line.find("`");
-				string code = checkcode(line);
-				line.erase(tick, code.size());
-				line.insert(tick, code);	
-				
+			if(line.find("**") != string::npos) {
+				int fa = line.find("**");
+				for(int i = fa+1; i < line.size(); i++) {
+					if(line.substr(i, 2) == "**") {
+						string bold = line.substr(fa+2, (i-2)-fa);
+						cout << bold << endl;
+						bold.insert(0, "<b>");
+						bold.append("</b>");
+						line.erase(fa, i+1);
+						line.insert(fa, bold);
+						break;
+					}	
+				}
 			}
+				
 		}
 
 
