@@ -3,8 +3,10 @@
 converts markdown to html
 
 ## current features
-- convert single and double # into h1 and h2 respectively
+- convert single, double, and tripe # into h1, h2 and h3 respectively
 - convert links
+- make text bolded
 
-## TODO
-- read code segments (one-line)
+## Usage
+`./main [name of markdown file]`
+

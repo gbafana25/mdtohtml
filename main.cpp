@@ -48,7 +48,6 @@ bool checklink(string in) {
 }
 
 
-
 string process_line(string line) {
 		if(line.substr(0, 1) == "#") {
 			if(line.substr(0, 2) == "##") {
@@ -101,18 +100,20 @@ string process_line(string line) {
 }
 
 
-int main() {
+int main(int argc, char **argv) {
 	fstream testfile;
 	fstream outfile;
-	testfile.open("/home/gareth/table-signal/README.md", ios::in);
-	
+	//cout << typeid(argv[1]).name();
+	testfile.open(argv[1], ios::in);
+
+		
 	string line;
 	string parsed;
 	while(getline(testfile, line)) {
 		parsed.append(process_line(line));
 	
 	}
-
+	
 	cout << parsed;
 	outfile.open("test.html", ios::out);
 	outfile << parsed;
